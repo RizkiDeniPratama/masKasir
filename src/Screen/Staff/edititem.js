@@ -41,7 +41,7 @@ export class edititem extends Component {
       stok,
       harga_beli,
       harga_jual,
-     } = this.state;
+    } = this.state;
 
     var myHeaders = new Headers();
     myHeaders.append('Authorization', `Bearer ${this.state.token}`);
@@ -59,7 +59,7 @@ export class edititem extends Component {
     formdata.append('harga_jual', harga_jual);
     formdata.append('nama_barang', nama_barang);
 
-    console.log('ini form edit supplier', formdata);
+    console.log('ini form edit barang', formdata);
 
     var requestOptions = {
       method: 'POST',
@@ -67,22 +67,22 @@ export class edititem extends Component {
       body: formdata,
     };
 
-    fetch(enpoint.editsupli + this.props.route.params.item.id, requestOptions)
+    fetch(enpoint.editBarang + this.props.route.params.item.id, requestOptions)
       .then((response) => response.json())
       .then((resJson) => {
         console.log('resjson nya sup === ', resJson);
         if (resJson.status === 'success') {
-          this.props.navigation.replace('Daftarsup');
-          ToastAndroid.show('Supplier berhasil diupdate!', 1500);
+          this.props.navigation.replace('DaftarBarang');
+          ToastAndroid.show('Barang berhasil diupdate!', 1500);
         } else {
           this.setState({loading: false});
-          ToastAndroid.show('Maaf supplier gagal diubah ya!', 1500);
+          ToastAndroid.show('Maaf barang gagal diubah ya!', 1500);
         }
       })
       .catch((error) => {
-        console.log('catch error edit supplier === ', error);
+        console.log('catch error edit barang === ', error);
         this.setState({loading: false});
-        ToastAndroid.show('Maaf supplier gagal diubah!', 1500);
+        ToastAndroid.show('Maaf barang gagal diubah!', 1500);
       });
   };
   componentDidMount() {

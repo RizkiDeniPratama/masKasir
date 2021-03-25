@@ -11,6 +11,7 @@ import {
   Modal,
   TextInput,
   ToastAndroid,
+  ActivityIndicator,
 } from 'react-native';
 import IonIcons from 'react-native-vector-icons/Ionicons';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
@@ -32,6 +33,7 @@ export class Home2 extends Component {
       foto_profil: {uri: '', type: 'image/jpeg', fileName: 'profilLama'},
       password: '',
       photo: '',
+      penjualan: [],
     };
   }
 
@@ -102,10 +104,62 @@ export class Home2 extends Component {
       }
     });
   };
+  getAllPenjualan() {
+    fetch(enpoint.getAllPenjualan, {
+      method: 'GET',
+      headers: {
+        Accept: 'aplication/json',
+        'Content-Type': 'aplication/json',
+        Authorization: `Bearer ${this.state.token}`,
+      },
+    })
+      .then((response) => response.json())
+      .then((resJson) => {
+        console.log('darirofil', resJson);
+        if (resJson.data) {
+          this.setState({penjualan: resJson.data});
+        } else {
+          console.log('penjualan tidak ada');
+        }
+      })
+      .catch((error) => {
+        console.log('error is' + error);
+      });
+  }
+
+  async getTransaksiBaru() {
+    this.setState({loading: true});
+    try {
+      let myOptions = {
+        headers: {
+          Authorization: `Bearer ${this.state.token}`,
+        },
+      };
+
+      let response = await fetch(enpoint.getTransaksiBaru, myOptions);
+
+      let resJson = await response.json();
+
+      console.log('ini resjson get kode transaksi == ', resJson);
+
+      if (resJson) {
+        this.setState({transaksi: resJson.data});
+        ToastAndroid.show('Memulai transaksi baru!!', 2000);
+        this.props.navigation.replace('TambahBarang', {
+          data: this.state.transaksi,
+        });
+      }
+    } catch (err) {
+      console.log('catch get transaksi == ', err);
+      ToastAndroid.show('Maaf gagal mengambil kode transaksi baru!!', 2000);
+    }
+  }
   componentDidMount() {
     AsyncStorage.getItem('token').then((value) => {
       if (value != null) {
-        this.setState({token: value}, () => {});
+        this.setState({token: value}, () => {
+          this.getAllPenjualan();
+        });
       } else {
         console.log('token tidak ada');
       }
@@ -171,8 +225,9 @@ export class Home2 extends Component {
                     alignItems: 'center',
                     justifyContent: 'center',
                     borderRadius: 8,
-                  }}>
-                  <Text style={{color: 'white'}}>Transaksi Baru</Text>
+                  }}
+                  onPress={() => this.getTransaksiBaru()}>
+                  <Text style={{color: 'white'}}>New Transaksi</Text>
                 </TouchableOpacity>
               </View>
             </ImageBackground>
@@ -195,10 +250,93 @@ export class Home2 extends Component {
               style={styles.arrow}
             />
           </TouchableOpacity>
-          {/* .....TRANSAKSI...... */}
-          <View style={{flex: 1}}>
-            <Text>Transaksi</Text>
+          {/* ......FITUR LAIN........ */}
+
+          {/* .....Story Pembelian...... */}
+
+          <View style={styles.viewtransaksi}>
+            <Text style={{fontSize: 22, fontWeight: 'bold'}}>
+              Transaction History
+            </Text>
+            {this.state.penjualan.map((v, i) => {
+              return (
+                <TouchableOpacity
+                  style={{
+                    flexDirection: 'row',
+                    alignItems: 'center',
+                    paddingVertical: 8,
+                    marginTop: 10,
+                    borderRadius: 3,
+                    // borderWidth: 0.1,
+                    borderBottomWidth: 1,
+                  }}>
+                  <Image
+                    source={require('../../Assets/Images/transaksi.png')}
+                    style={{width: 30, height: 30, tintColor: '#7F5DF0'}}
+                  />
+                  <View style={{flex: 1, marginLeft: 12}}>
+                    {v.kasir == 1 ? (
+                      <Text style={{fontSize: 16}}>mbk tini</Text>
+                    ) : (
+                      <>
+                        {v.kasir == 2 ? (
+                          <Text style={{fontSize: 16}}>mbk mega</Text>
+                        ) : (
+                          <>
+                            {v.kasir == 3 ? (
+                              <Text style={{fontSize: 16}}>mbk ayu</Text>
+                            ) : (
+                              <>
+                                {v.kasir == 4 ? (
+                                  <Text style={{fontSize: 16}}>mbk putri</Text>
+                                ) : (
+                                  <Text style={{fontSize: 16}}>
+                                    Tidak ada kasir
+                                  </Text>
+                                )}
+                              </>
+                            )}
+                          </>
+                        )}
+                      </>
+                    )}
+                    {/* <Text style={{fontSize: 16}}>kasir : {v.kasir}</Text> */}
+                    <Text
+                      style={{
+                        // color: '#6A6A6A',
+                        fontSize: 14,
+                        color: v.kasir == 4 ? '#6A6A6A' : 'green',
+                      }}>
+                      {v.kode_transaksi}
+                    </Text>
+                  </View>
+                  <View
+                    style={{
+                      flexDirection: 'row',
+                      height: '100%',
+                      alignItems: 'center',
+                    }}>
+                    <Text
+                      style={{
+                        // color: item.type == 'B' ? COLORS.green : COLORS.black,
+                        fontSize: 16,
+                      }}>
+                      $2000000
+                    </Text>
+                    <Image
+                      source={require('../../Assets/Images/right_arrow.png')}
+                      style={{
+                        width: 20,
+                        height: 20,
+                        tintColor: '#6A6A6A',
+                      }}
+                    />
+                  </View>
+                </TouchableOpacity>
+              );
+            })}
           </View>
+
           {/* ........MODAL ADD MEMBER........... */}
           <Modal
             animationType="slide"
@@ -480,5 +618,12 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     borderBottomWidth: 0.5,
     marginBottom: 10,
+  },
+  viewtransaksi: {
+    marginTop: 24,
+    marginHorizontal: 24,
+    padding: 20,
+    borderRadius: 12,
+    backgroundColor: '#fff',
   },
 });

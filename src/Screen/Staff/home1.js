@@ -15,6 +15,7 @@ import {
 // import LinearGradient from 'li';
 import IonIcons from 'react-native-vector-icons/Ionicons';
 import {enpoint} from '../../../enpoint';
+import FontAwesome from 'react-native-vector-icons/FontAwesome';
 // import IonIcons from 'react-native-vector-icons/Ionicons'
 export class Home1 extends Component {
   constructor() {
@@ -232,10 +233,10 @@ export class Home1 extends Component {
                 padding: 10,
               }}>
               <TouchableOpacity style={[styles.button, styles.shadow]}>
-                <IonIcons name="search" size={35} />
+                <FontAwesome name="list-alt" size={35} />
               </TouchableOpacity>
               <Text style={{fontSize: 13, marginTop: 7, fontWeight: 'bold'}}>
-                Search
+                Add Category
               </Text>
             </View>
             <View

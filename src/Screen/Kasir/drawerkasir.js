@@ -108,16 +108,12 @@ export class Drawermember extends Component {
                 flexDirection: 'row',
                 alignItems: 'center',
               }}
-              onPress={() =>
-                this.props.navigation.navigate('Editmember', {
-                  data: this.state.data,
-                })
-              }>
+              onPress={() => this.props.navigation.navigate('GetPenjualan')}>
               <View>
                 <Icon name="home-outline" size={40} />
               </View>
               <View style={{padding: 15}}>
-                <Text>Edit akun</Text>
+                <Text>Daftar Penjualan</Text>
               </View>
             </TouchableOpacity>
 

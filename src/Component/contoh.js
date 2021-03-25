@@ -1361,7 +1361,7 @@
 //                       this.setState({lokasi: v, modalAddress: false})
 //                     }
 //                     activeOpacity={0.8}    activeOpacity={0.8}
-              
+
 //                     style={styles.addressList}
 //                     key={i}>
 //                     <Text style={styles.addressListNumber}>

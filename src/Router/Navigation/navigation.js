@@ -25,6 +25,10 @@ import Transaksi from '../../Screen/Kasir/transaksi';
 import TopKasir from '../TopNavigation/topkasir';
 import GetMember from '../../Screen/Kasir/getmember';
 import EditMember from '../../Screen/Kasir/editmember';
+import TambahBarang from '../../Screen/Kasir/TambahBarang';
+import GetPenjualan from '../../Screen/Kasir/gettransaksi';
+import DetailTransaksi from '../../Screen/Kasir/detailTransaksi';
+import Last from '../../Screen/Kasir/last';
 const Stack = createStackNavigator();
 
 function Navigation() {
@@ -58,6 +62,10 @@ function Navigation() {
         <Stack.Screen name="TopKasir" component={TopKasir} />
         <Stack.Screen name="GetMember" component={GetMember} />
         <Stack.Screen name="EditMember" component={EditMember} />
+        <Stack.Screen name="TambahBarang" component={TambahBarang} />
+        <Stack.Screen name="GetPenjualan" component={GetPenjualan} />
+        <Stack.Screen name="DetailTransaksi" component={DetailTransaksi} />
+        <Stack.Screen name="Last" component={Last} />
       </Stack.Navigator>
     </NavigationContainer>
   );

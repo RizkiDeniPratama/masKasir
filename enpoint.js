@@ -79,4 +79,11 @@ export const enpoint = {
   addMember: 'https://pos-maskasir.herokuapp.com/api/member',
   getMember: 'https://pos-maskasir.herokuapp.com/api/member',
   editMemberKasir: 'https://pos-maskasir.herokuapp.com/api/member/',
+  getTransaksiBaru: 'https://pos-maskasir.herokuapp.com/api/penjualan/new',
+  getAllPenjualan: 'https://pos-maskasir.herokuapp.com/api/penjualan',
+  addItem: 'https://pos-maskasir.herokuapp.com/api/penjualan/add/', //kode transaksi
+  getTransaksi: 'https://pos-maskasir.herokuapp.com/api/penjualan/', //kode transaksi
+  editBarang: 'https://pos-maskasir.herokuapp.com/api/barang/', //id barang
+  getHarga: 'https://pos-maskasir.herokuapp.com/api/penjualan/harga/', //kode transaksi
+  bayar: 'https://pos-maskasir.herokuapp.com/api/penjualan/bayar/', //kode transaksi
 };

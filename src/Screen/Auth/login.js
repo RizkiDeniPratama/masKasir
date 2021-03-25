@@ -28,53 +28,7 @@ export class Login extends Component {
       password: '',
     };
   }
-  // {....................DATA resjsonnya YANG ADA ROLE NYA......................}
-  // login() {
-  //   if (this.state.email !== '' && this.state.password !== '') {
-  //     this.setState({loading: true});
-  //     console.log('proses login');
-  //     const {email, password} = this.state;
-  //     const data = {email: email, password: password};
-  //     this.setState({loading: true});
-  //     console.log('ini bodynya blm stringify === ', data);
-  //     fetch(enpoint.login, {
-  //       method: 'POST',
-  //       body: JSON.stringify(data),
-  //       headers: {
-  //         'Content-Type': 'application/json',
-  //       },
-  //     })
-  //       .then((res) => res.json())
-  //       .then((resJson) => {
-  //         console.log('ini resjson login === ', resJson);
-  //         const {token} = resJson;
-  //         const {role} = resJson.user;
-  //         const token_user = ['token', token];
-  //         const role_user = ['role', role];
-  //         if (resJson.token != null) {
-  //           this.state.check
-  //             ? AsyncStorage.multiSet([token_user, role_user]).catch((errr) =>
-  //                 console.log(errr),
-  //               )
-  //             : console.log('data user belum di simpan');
-  //           if (resJson.token) {
-  //             AsyncStorage.setItem('token', resJson.token);
-  //             this.setState({loading: false});
-  //             this.props.navigation.navigate('Home3');
-  //           }
-  //         } else {
-  //           this.setState({loading: false});
-  //           this.e();
-  //         }
-  //       })
-  //       .catch((err) => {
-  //         this.setState({loading: false});
-  //         alert('Terjadi kesalahan. ' + err);
-  //       });
-  //   } else {
-  //     ToastAndroid.show('Harap isi semua form', ToastAndroid.SHORT);
-  //   }
-  // }
+
   verifikasi(token) {
     fetch(enpoint.verifikasi, {
       method: 'GET',

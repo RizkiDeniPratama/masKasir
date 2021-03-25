@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
-import {Text, View} from 'react-native';
+import {Text, StyleSheet, View} from 'react-native';
 
-export class tambahsaldo extends Component {
+export default class Last extends Component {
   render() {
     return (
       <View>
@@ -11,4 +11,4 @@ export class tambahsaldo extends Component {
   }
 }
 
-export default tambahsaldo;
+const styles = StyleSheet.create({});
